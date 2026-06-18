@@ -366,7 +366,7 @@ function calculateUnitAward(score) {
     try {
 
       const verifyUrl =
-  `https://gdehexm.onrender.com/verify/${student.reg_number}`;
+  `https://gdehexm.onrender.com/verify/${data.reg_number}`;
 
       const qrDataUrl =
         await QRCode.toDataURL(verifyUrl);
