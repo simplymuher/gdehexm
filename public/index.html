@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>                                                <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GDEH End of Training Exam</title>     
+<style>         
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+.container{
+    width:95%;
+    max-width:850px;
+    margin:auto;
+    padding:10px;
+    flex:1;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:5px;
+}
+
+.logo img{
+    width:80px;
+    height:auto;
+}
+
+.header{
+    text-align:center;
+    color:#001f54;
+}
+
+.header h1{
+    font-size:18px;
+    font-weight:700;
+}
+
+.header h2{
+    font-size:14px;
+    margin-top:2px;
+}
+
+.header p{
+    font-size:12px;
+    margin-top:2px;
+}
+
+.instructions{
+    margin-top:10px;
+    background:#fff;
+    border-left:4px solid red;
+    padding:10px;
+    border-radius:6px;
+    color:red;
+    font-size:11px;
+    line-height:1.5;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+
+.timer-box{
+    margin-top:10px;
+    background:#fff;
+    padding:12px;
+    border-radius:8px;
+    text-align:center;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+
+.timer-box h3{
+    color:#001f54;
+    font-size:13px;
+}
+
+#timer{
+    font-size:28px;
+    font-weight:bold;
+    color:#001f54;
+}
+
+.student-section{
+    margin-top:10px;
+    background:#fff;
+    padding:12px;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+
+.student-section input,
+.student-section select{
+    width:100%;
+    padding:10px;
+    margin-bottom:8px;
+    border:1px solid #d6d6d6;
+    border-radius:6px;
+    font-size:13px;
+    outline:none;
+}
+
+.student-section input:focus,
+.student-section select:focus{
+    border-color:#001f54;
+}
+
+button{
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:6px;
+    background:#001f54;
+    color:#fff;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.95;
+}
+
+#questionsContainer{
+    margin-top:12px;
+}
+
+.unit-title{
+    background:#001f54;
+    color:white;
+    padding:10px;
+    border-radius:6px;
+    margin-bottom:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.question{
+    background:white;
+    padding:12px;
+    margin-bottom:8px;
+    border-radius:8px;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+
+.question h4{
+    font-size:13px;
+    color:#222;
+    margin-bottom:8px;
+    line-height:1.5;
+}
+
+.question label{
+    display:block;
+    padding:5px 0;
+    font-size:12px;
+    color:#444;
+}
+
+.question input[type="radio"]{
+    margin-right:6px;
+}
+
+#submitExamBtn{
+    margin-top:10px;
+    background:#0a5c2b;
+}
+
+.result-box{
+    margin-top:15px;
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    text-align:center;
+    box-shadow:0 1px 5px rgba(0,0,0,.08);
+}
+
+.result-box h2{
+    color:#001f54;
+    margin-bottom:10px;
+}
+
+.result-box p{
+    margin:5px 0;
+    font-size:14px;
+}
+
+footer{
+    margin-top:auto;
+    background:#001f54;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:11px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="gdeh_logo.png" alt="GDEH Logo">
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>GARISSA DIGITAL EMPOWERMENT HUB CBO</h1>
+        <h2>END OF TRAINING EXAM</h2>
+        <p>P.O BOX 10 70100 GARISSA</p>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+
+        <strong>EXAM INSTRUCTIONS</strong><br><br>
+
+        1. Read all questions carefully before answering.<br>
+        2. Select only one answer for each question.<br>
+        3. Each question carries 3 marks.<br>
+        4. Total questions: 20.<br>
+        5. Total marks: 60.<br>
+        6. Exam duration is 60 minutes.<br>
+        7. Do not refresh the browser during the examination.<br>
+        8. The exam will auto-submit when time expires.<br>
+        9. Click Submit Exam when finished.<br>
+
+    </div>
+
+    <!-- Timer -->
+    <div class="timer-box">
+        <h3>Time Remaining</h3>
+        <div id="timer">60:00</div>
+    </div>
+
+    <!-- LOGIN SECTION -->
+<div class="student-section" id="loginSection">
+
+    <input type="text" id="username" placeholder="Username (e.g. John Doe)">
+
+    <input type="password" id="password" placeholder="Password (Reg Number e.g. CP001)">
+
+    <button id="loginBtn">Login</button>
+
+</div>
+
+
+<!-- COURSE SECTION (hidden first) -->
+<div class="student-section" id="courseSection" style="display:none;">
+
+    <select id="course">
+        <option value="">Select Course</option>
+        <option>Computer Packages</option>
+        <option>Agro Entrepreneurship</option>
+        <option>Smartphone Literacy</option>
+        <option>ICT Short Courses</option>
+    </select>
+
+    <button id="loadExamBtn">Start Exam</button>
+
+</div>
+
+
+<!-- QUESTIONS -->
+<div id="questionsContainer"></div>
+<footer>
+    © GDEH CBO EXAMS All Rights Reserved
+</footer>
+
+<script>
+
+let timerStarted = false;
+let timeLeft = 60 * 60;
+let examSession = null;
+
+let username = "";
+let regNumber = "";
+
+/* =========================
+   TIMER
+========================= */
+function startTimer() {
+
+    if (timerStarted) return;
+
+    timerStarted = true;
+
+    const timer =
+        document.getElementById("timer");
+
+    const interval = setInterval(() => {
+
+        const mins =
+            Math.floor(timeLeft / 60);
+
+        const secs =
+            timeLeft % 60;
+
+        timer.innerHTML =
+            `${mins}:${secs.toString().padStart(2,"0")}`;
+
+        timeLeft--;
+
+        if (timeLeft < 0) {
+
+            clearInterval(interval);
+
+            alert("Time is over. Exam will be submitted.");
+
+            submitExam();
+
+        }
+
+    }, 1000);
+
+}
+
+/* =========================
+   LOGIN
+========================= */
+document
+.getElementById("loginBtn")
+.addEventListener("click", login);
+
+async function login() {
+
+    username =
+        document.getElementById("username")
+        .value.trim();
+
+    regNumber =
+        document.getElementById("password")
+        .value.trim();
+
+    if (!username || !regNumber) {
+
+        alert(
+            "Enter username and password"
+        );
+
+        return;
+
+    }
+
+    try {
+
+        const response =
+            await fetch("/login", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                    "application/json"
+                },
+
+                body: JSON.stringify({
+                    username,
+                    password: regNumber
+                })
+
+            });
+
+        const result =
+            await response.json();
+
+        if (!result.success) {
+
+            alert(
+                result.message ||
+                "Login failed"
+            );
+
+            return;
+
+        }
+
+        examSession =
+            result.sessionId;
+
+        document
+        .getElementById("loginSection")
+        .style.display = "none";
+
+        document
+        .getElementById("courseSection")
+        .style.display = "block";
+
+        alert("Login successful");
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Login error");
+
+    }
+
+}
+
+/* =========================
+   LOAD QUESTIONS
+========================= */
+document
+.getElementById("loadExamBtn")
+.addEventListener(
+    "click",
+    loadQuestions
+);
+
+async function loadQuestions() {
+
+    const course =
+        document.getElementById("course")
+        .value;
+
+    if (!course) {
+
+        alert("Select course");
+
+        return;
+
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                "/questions/" +
+                encodeURIComponent(course),
+                {
+                    headers: {
+                        "Authorization":
+                        examSession
+                    }
+                }
+            );
+
+        const questions =
+            await response.json();
+
+        const container =
+            document.getElementById(
+                "questionsContainer"
+            );
+
+        container.innerHTML = "";
+
+        let currentUnit = "";
+
+        questions.forEach((q, index) => {
+
+            if (
+                currentUnit !==
+                q.unit_code
+            ) {
+
+                currentUnit =
+                    q.unit_code;
+
+                container.innerHTML += `
+                    <div class="unit-title">
+                        ${q.unit_code}
+                        -
+                        ${q.unit_name}
+                    </div>
+                `;
+            }
+
+            container.innerHTML += `
+                <div class="question">
+
+                    <h4>
+                        ${index + 1}.
+                        ${q.question}
+                    </h4>
+
+                    <label>
+                        <input
+                        type="radio"
+                        name="q${q.id}"
+                        value="A">
+                        ${q.option_a}
+                    </label>
+
+                    <label>
+                        <input
+                        type="radio"
+                        name="q${q.id}"
+                        value="B">
+                        ${q.option_b}
+                    </label>
+
+                    <label>
+                        <input
+                        type="radio"
+                        name="q${q.id}"
+                        value="C">
+                        ${q.option_c}
+                    </label>
+
+                    <label>
+                        <input
+                        type="radio"
+                        name="q${q.id}"
+                        value="D">
+                        ${q.option_d}
+                    </label>
+
+                </div>
+            `;
+
+        });
+
+        container.innerHTML += `
+            <button id="submitExamBtn">
+                Submit Exam
+            </button>
+        `;
+
+        document
+        .getElementById(
+            "submitExamBtn"
+        )
+        .addEventListener(
+            "click",
+            submitExam
+        );
+
+        startTimer();
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert(
+            "Failed to load questions"
+        );
+
+    }
+
+}
+
+/* =========================
+   SUBMIT EXAM
+========================= */
+async function submitExam() {
+
+    const course =
+        document.getElementById("course")
+        .value;
+
+    const answers = {};
+
+    document
+    .querySelectorAll(
+        'input[type="radio"]:checked'
+    )
+    .forEach(input => {
+
+        const qid =
+            input.name.replace(
+                "q",
+                ""
+            );
+
+        answers[qid] =
+            input.value;
+
+    });
+
+    try {
+
+        const response =
+            await fetch("/submit", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                    "application/json",
+                    "Authorization":
+                    examSession
+                },
+
+                body: JSON.stringify({
+
+                    studentName:
+                        username,
+
+                    regNumber:
+                        regNumber,
+
+                    course,
+
+                    answers,
+
+                    sessionId:
+                        examSession
+
+                })
+
+            });
+
+        const result =
+            await response.json();
+
+        if (!result.success) {
+
+            alert(
+                result.message ||
+                "Submission failed"
+            );
+
+            return;
+
+        }
+
+        document
+        
+.getElementById(
+    "questionsContainer"
+)
+.innerHTML = `
+
+    <div class="result-box">
+
+        <h2>
+            Exam Completed
+        </h2>
+
+        <p>
+            Score:
+            ${result.totalScore}/60
+        </p>
+
+        <p>
+            Percentage:
+            ${result.percentage}%
+        </p>
+
+        <p>
+            Grade:
+            ${result.grade}
+        </p>
+
+        <p>
+            ${result.remarks}
+        </p>
+
+        <br>
+
+        <a
+            href="${result.pdf}"
+            target="_blank">
+
+            Download Result Slip
+
+        </a>            
+
+    </div>
+
+`;
+        
+    } catch (err) {
+
+        console.error(err);
+
+        alert(
+            "Error submitting exam"
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

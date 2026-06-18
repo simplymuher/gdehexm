@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>GDEH Online Admission</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#ffffff;
+    color:#0B1F4D;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+}
+
+.logo{
+    text-align:center;
+}
+
+.logo img{
+    width:110px;
+}
+h1{
+    text-align:center;
+    font-size:20px;
+    margin:10px 0;
+    color:#0B1F4D;
+}
+
+h2{
+    text-align:center;
+    font-size:18px;
+    margin:10px 0;
+    color:#0B1F4D;
+}
+
+form{
+    margin-top:20px;
+}
+
+label{
+    display:block;
+    font-size:10px;
+    font-weight:600;
+    margin-top:12px;
+    margin-bottom:4px;
+    color:#0B1F4D;
+}
+
+input,
+select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    box-sizing:border-box;
+}
+
+.consent{
+    text-align:center;
+    margin-top:20px;
+    font-size:12px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:20px;
+    background:#0B1F4D;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:14px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+footer{
+    text-align:center;
+    margin-top:30px;
+    font-size:12px;
+    color:#0B1F4D;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+<img src="gdeh_logo.png">
+</div>
+
+<h1>
+GARISSA DIGITAL EMPOWERMENT HUB CBO
+</h1>
+<h2> Online Admission Form</h2>
+
+<form id="applicationForm">
+
+<label>Full Names</label>
+<input type="text" id="fullName" name="fullName" required>
+
+<label>Gender</label>
+<select id="gender" name="gender" required>
+  <option value="">Select</option>
+  <option>Male</option>
+  <option>Female</option>
+</select>
+
+<label>Date of Birth</label>
+<input type="date" id="dateOfBirth" name="dob" required>
+
+<label>Email Address</label>
+<input type="email" id="email" name="email">
+
+<label>Phone Number</label>
+<input type="tel" id="phone" name="phone" required>
+
+<label>County</label>
+<select id="county" required>
+  <option value="">Select County</option>
+</select>
+
+<label>Sub County</label>
+<select id="subCounty" required>
+  <option value="">Select Sub County</option>
+</select>
+
+<label>Ward</label>
+<select id="ward" required>
+  <option value="">Select Ward</option>
+</select>
+
+<label>Next of Kin</label>
+<input type="text" id="nextOfKin" name="nextOfKin" required>
+
+<label>Course Applying For</label>
+<select id="courseName" name="course" required>
+  <option value="">Select Course</option>
+  <option>Computer Packages</option>
+  <option>Agro Entrepreneurship</option>
+  <option>Smartphone Literacy</option>
+  <option>ICT</option>
+</select>
+
+<label>Study Session</label>
+<select id="studySession" name="session" required>
+  <option value="">Select Session</option>
+  <option>Morning</option>
+  <option>Afternoon</option>
+  <option>Evening</option>
+  <option>Holiday Based</option>
+</select>
+
+<label>Where Did You Hear About Us? (Optional)</label>
+<input type="text" id="referralSource" name="referral">
+
+<div class="consent">
+  <label>
+    <input type="checkbox" id="consent" required>
+    I confirm that the information provided is true and correct.
+  </label>
+</div>
+
+<button type="submit">
+  Submit Application
+</button>
+</form>
+
+<footer>
+© GDEH CBO All Rights Reserved
+</footer>
+
+</div>
+<script>
+
+/*
+------------------------------------------------
+Load Counties
+------------------------------------------------
+*/
+
+async function loadCounties() {
+
+  const res =
+    await fetch("/api/counties");
+
+  const counties =
+    await res.json();
+
+  const county =
+    document.getElementById("county");
+
+  county.innerHTML =
+    '<option value="">Select County</option>';
+
+  counties.forEach(item => {
+
+    county.innerHTML +=
+      `<option value="${item.county}">
+        ${item.county}
+      </option>`;
+
+  });
+
+}
+
+/*
+------------------------------------------------
+Load Sub Counties
+------------------------------------------------
+*/
+
+document
+.getElementById("county")
+.addEventListener(
+  "change",
+  async function () {
+
+    const county =
+      this.value;
+
+    const res =
+      await fetch(
+        `/api/subcounties/${encodeURIComponent(county)}`
+      );
+
+    const data =
+      await res.json();
+
+    const subCounty =
+      document.getElementById("subCounty");
+
+    subCounty.innerHTML =
+      '<option value="">Select Sub County</option>';
+
+    data.forEach(item => {
+
+      subCounty.innerHTML +=
+        `<option value="${item.sub_county}">
+          ${item.sub_county}
+        </option>`;
+
+    });
+
+    document.getElementById("ward")
+      .innerHTML =
+      '<option value="">Select Ward</option>';
+
+  }
+);
+
+/*
+------------------------------------------------
+Load Wards
+------------------------------------------------
+*/
+
+document
+.getElementById("subCounty")
+.addEventListener(
+  "change",
+  async function () {
+
+    const county =
+      document.getElementById("county").value;
+
+    const subCounty =
+      this.value;
+
+    const res =
+      await fetch(
+        `/api/wards/${encodeURIComponent(county)}/${encodeURIComponent(subCounty)}`
+      );
+
+    const data =
+      await res.json();
+
+    const ward =
+      document.getElementById("ward");
+
+    ward.innerHTML =
+      '<option value="">Select Ward</option>';
+
+    data.forEach(item => {
+
+      ward.innerHTML +=
+        `<option value="${item.ward}">
+          ${item.ward}
+        </option>`;
+
+    });
+
+  }
+);
+
+/*
+------------------------------------------------
+Submit Application
+------------------------------------------------
+*/
+
+document
+.getElementById("applicationForm")
+.addEventListener(
+  "submit",
+  async function (e) {
+
+    e.preventDefault();
+
+    const consent =
+      document.getElementById("consent");
+
+    if (!consent.checked) {
+
+      alert(
+        "Please accept the declaration."
+      );
+
+      return;
+
+    }
+
+    const payload = {
+
+      fullName:
+        document.getElementById("fullName").value,
+
+      gender:
+        document.getElementById("gender").value,
+
+      dateOfBirth:
+        document.getElementById("dateOfBirth").value,
+
+      email:
+        document.getElementById("email").value,
+
+      phone:
+        document.getElementById("phone").value,
+
+      county:
+        document.getElementById("county").value,
+
+      subCounty:
+        document.getElementById("subCounty").value,
+
+      ward:
+        document.getElementById("ward").value,
+
+      nextOfKin:
+        document.getElementById("nextOfKin").value,
+
+      courseName:
+        document.getElementById("courseName").value,
+
+      studySession:
+        document.getElementById("studySession").value,
+
+      referralSource:
+        document.getElementById("referralSource").value
+
+    };
+
+    try {
+
+      const response =
+        await fetch(
+          "/apply",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+            body:
+              JSON.stringify(payload)
+          }
+        );
+
+      const result =
+        await response.json();
+
+      if (!result.success) {
+
+        alert(
+          result.error ||
+          "Application failed"
+        );
+
+        return;
+
+      }
+
+      /*
+      ----------------------------------------
+      Admission Letter
+      ----------------------------------------
+      */
+
+      const letter =
+      window.open(
+        "",
+        "_blank"
+      );
+
+      letter.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admission Letter</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+padding:40px;
+color:#0B1F4D;
+background:#fff;
+}
+
+.logo{
+text-align:center;
+}
+
+.logo img{
+width:120px;
+}
+
+h1,h2{
+text-align:center;
+margin:5px;
+}
+
+.signature{
+margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="logo" style="text-align:center;">
+  <img src="/gdeh_logo.png" width="90">
+</div>
+
+<h1 style="text-align:center;">
+  GARISSA DIGITAL EMPOWERMENT HUB CBO
+</h1>
+
+<p style="text-align:center;">
+  Along Kismayu Road Off Rubis Energy<br>
+  Opposite Horizon High School<br>
+  P.O Box 10-70100 Garissa
+</p>
+
+<hr>
+
+<h2 style="text-align:center;">
+  OFFICIAL ADMISSION LETTER
+</h2>
+
+<hr>
+
+<br>
+
+<p>
+  Date: ${new Date().toLocaleDateString()}
+</p>
+
+<br>
+
+<p>
+  Dear <strong>${result.fullName}</strong>,
+</p>
+
+<br>
+
+<p>
+  <strong>Registration Number:</strong>
+  ${result.regNumber}
+</p>
+
+<p>
+  <strong>Course Admitted:</strong>
+  ${result.courseName}
+</p>
+
+<p>
+  <strong>Study Session:</strong>
+  ${result.studySession}
+</p>
+
+<br>
+
+<p style="text-align:justify; line-height:1.8;">
+  We are pleased to inform you that following the review
+  of your application, you have successfully met the
+  admission requirements and have been offered a place
+  at Garissa Digital Empowerment Hub CBO. This admission
+  confirms your eligibility to undertake the above course
+  and participate in all academic and training activities
+  organized by the institution.
+</p>
+
+<p style="text-align:justify; line-height:1.8;">
+  During your period of study, you are expected to
+  demonstrate commitment, discipline, professionalism,
+  and respect for institutional regulations. The training
+  program has been designed to equip learners with
+  practical knowledge, technical skills, and competencies
+  necessary for personal development, employment, and
+  entrepreneurship opportunities within the digital and
+  business environment.
+</p>
+
+<p style="text-align:justify; line-height:1.8;">
+  On behalf of the management and staff of Garissa
+  Digital Empowerment Hub CBO, we congratulate you on
+  your admission and welcome you to our learning
+  community. We look forward to supporting your
+  educational journey and helping you achieve your
+  academic and career goals. Kindly keep this admission
+  letter for future reference during your studies.
+</p>
+
+<br><br>
+
+<div style="text-align:left;">
+
+  <p>
+    Yours Faithfully,
+  </p>
+
+  <img
+    src="/signature.jpg"
+    width="140"
+  >
+
+  <p>
+    <strong>Abdullahi Sheikh Aden</strong>
+  </p>
+
+  <p>
+    Programme Coordinator
+  </p>
+
+  <p>
+    Garissa Digital Empowerment Hub CBO
+  </p>
+
+</div>
+
+<br>
+
+<hr>
+
+<p style="text-align:center;">
+  © GDEH CBO All Rights Reserved
+</p>
+</body>
+</html>
+      `);
+
+      letter.document.close();
+
+      setTimeout(() => {
+
+        letter.print();
+
+      }, 1000);
+
+      document
+      .getElementById(
+        "applicationForm"
+      )
+      .reset();
+
+      loadCounties();
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Failed to submit application"
+      );
+
+    }
+
+  }
+);
+
+/*
+------------------------------------------------
+Initialize
+------------------------------------------------
+*/
+
+loadCounties();
+
+</script>
+
+</body>
+</html>
