@@ -370,13 +370,16 @@ function calculateUnitAward(score) {
 const verifyUrl =
   `https://gdehexm.onrender.com/verify/${regNumber}`;
 
-      const qrBuffer = Buffer.from(
-        qrDataUrl.replace(
-          /^data:image\/png;base64,/,
-          ""
-        ),
-        "base64"
-      );
+const qrDataUrl =
+  await QRCode.toDataURL(verifyUrl);
+
+const qrBuffer = Buffer.from(
+  qrDataUrl.replace(
+    /^data:image\/png;base64,/,
+    ""
+  ),
+  "base64"
+);
 
       
       const filename = `${data.regNumber}_${Date.now()}.pdf`;
