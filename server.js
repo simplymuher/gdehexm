@@ -365,11 +365,10 @@ function calculateUnitAward(score) {
 
     try {
 
-      const verifyUrl =
-  `https://gdehexm.onrender.com/verify/${data.reg_number}`;
+      const regNumber = data.regNumber;
 
-      const qrDataUrl =
-        await QRCode.toDataURL(verifyUrl);
+const verifyUrl =
+  `https://gdehexm.onrender.com/verify/${regNumber}`;
 
       const qrBuffer = Buffer.from(
         qrDataUrl.replace(
