@@ -1349,30 +1349,24 @@ console.log("🔥 APPLY ROUTE HIT");
     const year =
       new Date().getFullYear();
 
-    /*
-    ------------------------------------------------
-    Generate Registration Number
-    ------------------------------------------------
-    */
+   
+ /*
+------------------------------------------------
+Generate Registration Number
+------------------------------------------------
+*/
 
-    const countResult =
-      await pool.query(
-        `
-        SELECT COUNT(*) AS total
-        FROM applications
-        WHERE course_name = $1
-        `,
-        [courseName]
-      );
+const seqResult = await pool.query(
+  `SELECT nextval('reg_number_seq') AS id`
+);
 
-    const nextNumber =
-      parseInt(
-        countResult.rows[0].total
-      ) + 1;
+const seq = Number(seqResult.rows[0].id);
 
-    const regNumber =
-      `GD-${courseCode}-${String(nextNumber).padStart(4,"0")}-${year}`;
+const uniqueNumber =
+  ((seq * 7919) % 9000000) + 1000000;
 
+const regNumber =
+  `GD-${courseCode}-${uniqueNumber}`;
     /*
     ------------------------------------------------
     Save Application
