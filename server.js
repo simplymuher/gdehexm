@@ -116,7 +116,7 @@ app.post("/login", async (req, res) => {
     }
 
 });
-    
+
 /*
 |--------------------------------------------------------------------------
 | Results Folder
@@ -355,250 +355,194 @@ function calculateUnitAward(score) {
   return "FAIL";
 }
 
-/*
-|--------------------------------------------------------------------------
-| Generate PDF Result Slip
-|--------------------------------------------------------------------------
-*/
       function generatePDF(data) {
-  return new Promise(async (resolve, reject) => {
-
-    try {
-
-      const regNumber = data.regNumber;
-
+  return new Promise(async (resolve, reject) => {
+    try {
+      const regNumber = data.regNumber;
 const verifyUrl =
-  `https://gdehexm.onrender.com/verify/${regNumber}`;
-
+  `https://gdehexm.onrender.com/verify/${regNumber}`;
 const qrDataUrl =
-  await QRCode.toDataURL(verifyUrl);
-
+  await QRCode.toDataURL(verifyUrl);
 const qrBuffer = Buffer.from(
-  qrDataUrl.replace(
-    /^data:image\/png;base64,/,
-    ""
-  ),
-  "base64"
+  qrDataUrl.replace(
+    /^data:image\/png;base64,/,
+    ""
+  ),
+  "base64"
 );
-
-      
-      const filename = `${data.regNumber}_${Date.now()}.pdf`;
-      const filepath = path.join(resultsDir, filename);
-      
-
-      const doc = new PDFDocument({
-        margin: 40,
-        size: "A4"
-      });
-
-      const stream = fs.createWriteStream(filepath);
-      doc.pipe(stream);
-      
-
-
-      const logoPath = path.join(__dirname, "gdeh_logo.png");
-
-      if (fs.existsSync(logoPath)) {
-        doc.image(logoPath, 240, 20, { width: 100 });
-      }
-
-      doc.moveDown(5);
-
-      doc
-        .fillColor("#001f54")
-        .fontSize(16)
-        .text("GARISSA DIGITAL EMPOWERMENT HUB CBO", { align: "center" });
-
-      doc
-        .fontSize(13)
-        .text("END OF TRAINING EXAM", { align: "center" });
-
-      doc.moveDown();
-
-      doc.fontSize(10)
-        .text("Along Kismayu RD off Rubis Energy opp Horizon High School", { align: "center" })
-        .text("P.O BOX 10 70100 Garissa", { align: "center" });
-
-      doc.moveDown();
-
-      doc
-        .fontSize(14)
-        .text(`${data.course.toUpperCase()} RESULT SLIP`, { align: "center" })
-        .fontSize(12)
-        .text("YEAR 2026", { align: "center" });
-
-      doc.moveDown(2);
-
-      doc.fontSize(11);
-      doc.text(`Name of Student: ${data.studentName}`);
-      doc.text(`Reg Number: ${data.regNumber}`);
-      doc.text(`Date: ${new Date().toLocaleDateString()}`);
-
-      doc.moveDown();
-
-      let y = doc.y;
-
-      doc.text("Unit Name", 40, y);
-      doc.text("Code", 220, y);
-      doc.text("Hours", 280, y);
-      doc.text("Score", 340, y);
-      doc.text("Award", 420, y);
-
-      y += 20;
-
-      doc.moveTo(40, y).lineTo(550, y).stroke();
-      y += 10;
-
-      data.unitResults.forEach(unit => {
-        doc.text(unit.unit_name, 40, y, { width: 160 });
-        doc.text(unit.unit_code, 220, y);
-        doc.text("12", 280, y);
-        doc.text(`${unit.score}/12`, 340, y);
-        doc.text(unit.award, 420, y);
-
-        y += 25;
-      });
-
-      doc.moveDown(2);
-
-      doc.text(`Total Marks: ${data.totalScore}/60`);
-      doc.text(`Percentage: ${data.percentage}%`);
-      doc.text(`Grade: ${data.grade}`);
-
-      doc.moveDown();
-
-      doc
-        .fillColor("red")
-        .fontSize(11)
-        .text(`Remarks: ${data.remarks || ""}`);
-
-      doc.fillColor("black");
-
-      doc.moveDown(2);
+      const filename = `${data.regNumber}_${Date.now()}.pdf`;
+      const filepath = path.join(resultsDir, filename);
+      const doc = new PDFDocument({
+        margin: 40,
+        size: "A4"
+      });
+      const stream = fs.createWriteStream(filepath);
+      doc.pipe(stream);
+      const logoPath = path.join(__dirname, "gdeh_logo.png");
+      if (fs.existsSync(logoPath)) {
+        doc.image(logoPath, 240, 20, { width: 100 });
+      }
+      doc.moveDown(5);
+      doc
+        .fillColor("#001f54")
+        .fontSize(16)
+        .text("GARISSA DIGITAL EMPOWERMENT HUB CBO", { align: "center" });
+      doc
+        .fontSize(13)
+        .text("END OF TRAINING EXAM", { align: "center" });
+      doc.moveDown();
+      doc.fontSize(10)
+        .text("Along Kismayu RD off Rubis Energy opp Horizon High School", { align: "center" })
+        .text("P.O BOX 10 70100 Garissa", { align: "center" });
+      doc.moveDown();
+      doc
+        .fontSize(14)
+        .text(`${data.course.toUpperCase()} RESULT SLIP`, { align: "center" })
+        .fontSize(12)
+        .text("YEAR 2026", { align: "center" });
+      doc.moveDown(2);
+      doc.fontSize(11);
+      doc.text(`Name of Student: ${data.studentName}`);
+      doc.text(`Reg Number: ${data.regNumber}`);
+      doc.text(`Date: ${new Date().toLocaleDateString()}`);
+      doc.moveDown();
+      let y = doc.y;
+      doc.text("Unit Name", 40, y);
+      doc.text("Code", 220, y);
+      doc.text("Hours", 280, y);
+      doc.text("Score", 340, y);
+      doc.text("Award", 420, y);
+      y += 20;
+      doc.moveTo(40, y).lineTo(550, y).stroke();
+      y += 10;
+      data.unitResults.forEach(unit => {
+        doc.text(unit.unit_name, 40, y, { width: 160 });
+        doc.text(unit.unit_code, 220, y);
+        doc.text("12", 280, y);
+        doc.text(`${unit.score}/12`, 340, y);
+        doc.text(unit.award, 420, y);
+        y += 25;
+      });
+      doc.moveDown(2);
+      doc.text(`Total Marks: ${data.totalScore}/60`);
+      doc.text(`Percentage: ${data.percentage}%`);
+      doc.text(`Grade: ${data.grade}`);
+      doc.moveDown();
+      doc
+        .fillColor("red")
+        .fontSize(11)
+        .text(`Remarks: ${data.remarks || ""}`);
+      doc.fillColor("black");
+      doc.moveDown(2);
 /*
 ------------------------------------------------
 QR Code Verification
 ------------------------------------------------
 */
-
 const qrX = 260;
 const qrY = 600;
 const qrSize = 70;
-
 doc.image(
-  qrBuffer,
-  qrX,
-  qrY,
-  {
-    width: qrSize
-  }
+  qrBuffer,
+  qrX,
+  qrY,
+  {
+    width: qrSize
+  }
 );
-
 doc
-  .font("Helvetica-Bold")
-  .fontSize(8)
-  .fillColor("black")
-  .text(
-    "Scan to Verify This Result Slip",
-    qrX - 15,
-    qrY + qrSize + 5,
-    {
-      width: 100,
-      align: "center"
-    }
-  );
-
+  .font("Helvetica-Bold")
+  .fontSize(8)
+  .fillColor("black")
+  .text(
+    "Scan to Verify This Result Slip",
+    qrX - 15,
+    qrY + qrSize + 5,
+    {
+      width: 100,
+      align: "center"
+    }
+  );
 /*
 ------------------------------------------------
 Signature
 ------------------------------------------------
 */
-
 const signPath = path.join(
-  __dirname,
-  "signature.jpg"
+  __dirname,
+  "signature.jpg"
 );
-
 const signY = 630;
-
 doc
-  .font("Helvetica")
-  .fontSize(10)
-  .fillColor("black")
-  .text(
-    "Authorizing Signature",
-    50,
-    signY
-  );
-
+  .font("Helvetica")
+  .fontSize(10)
+  .fillColor("black")
+  .text(
+    "Authorizing Signature",
+    50,
+    signY
+  );
 if (fs.existsSync(signPath)) {
-
-  doc.image(
-    signPath,
-    50,
-    signY + 15,
-    {
-      width: 100
-    }
-  );
-
+  doc.image(
+    signPath,
+    50,
+    signY + 15,
+    {
+      width: 100
+    }
+  );
 }
-
 doc
-  .font("Helvetica-Bold")
-  .fontSize(10)
-  .text(
-    "Abdullahi Sheikh Aden",
-    50,
-    signY + 80
-  );
-
+  .font("Helvetica-Bold")
+  .fontSize(10)
+  .text(
+    "Abdullahi Sheikh Aden",
+    50,
+    signY + 80
+  );
 doc
-  .font("Helvetica")
-  .fontSize(10)
-  .text(
-    "Programme Coordinator",
-    50,
-    signY + 95
-  );
-
+  .font("Helvetica")
+  .fontSize(10)
+  .text(
+    "Programme Coordinator",
+    50,
+    signY + 95
+  );
 /*
 ------------------------------------------------
 Note
 ------------------------------------------------
 */
-
 doc
-  .font("Helvetica")
-  .fontSize(10)
-  .fillColor("red")
-  .text(
-    "N/B: This is a computer generated result slip and is valid without stamp.",
-    0,
-    755,
-    {
-      align: "center"
-    }
-  );
-
+  .font("Helvetica")
+  .fontSize(10)
+  .fillColor("red")
+  .text(
+    "N/B: This is a computer generated result slip and is valid without stamp.",
+    0,
+    755,
+    {
+      align: "center"
+    }
+  );
 /*
 ------------------------------------------------
 Footer
 ------------------------------------------------
 */
-
 doc
-  .font("Helvetica")
-  .fontSize(11)
-  .fillColor("#0B1F4D")
-  .text(
-    "© GDEH CBO EXAMS All Rights Reserved",
-    0,
-    780,
-    {
-      align: "center"
-    }
-  );
+  .font("Helvetica")
+  .fontSize(11)
+  .fillColor("#0B1F4D")
+  .text(
+    "© GDEH CBO EXAMS All Rights Reserved",
+    0,
+    780,
+    {
+      align: "center"
+    }
+  );
+      
       doc.end();
 
       stream.on("finish", () => {
@@ -668,7 +612,7 @@ app.post("/submit", async (req, res) => {
         error: "You already submitted this exam"
       });
     }
-    
+
     /*
 -----------------------------------------------------------------------
 Load Exam Questions
@@ -760,7 +704,7 @@ app.get("/questions/:course", async (req, res) => {
   }
 
 });
- 
+
   /*
 ------------------------------------------------
 Load Submitted Questions
@@ -785,8 +729,8 @@ const questions =
 
 let totalScore = 0;
 
-const unitScores = {};      
-    
+const unitScores = {};
+
 /*
 ------------------------------------------------
 Mark Questions
@@ -1040,7 +984,7 @@ Mark Questions
 
       remarks:
         gradeInfo.remarks,
-       regNumber,       
+       regNumber,
 
       pdf:
         `/download/${pdfFile}`
@@ -1111,8 +1055,8 @@ app.get("/verify/:regNumber", async (req, res) => {
       <html>
       <head>
         <title>GDEH Verification Portal</title>
-  
-          
+
+
        <style>
 
 body{
@@ -1173,7 +1117,12 @@ footer{
 
           <p><strong>Course:</strong> ${student.course_name}</p>
 
-          <p><strong>Status:</strong> VERIFIED ✓</p>
+          <p>
+  <strong>Status:</strong>
+  <span class="verified">
+    VERIFIED ✓
+  </span>
+</p>
 
         </div>
 
@@ -1349,7 +1298,7 @@ console.log("🔥 APPLY ROUTE HIT");
     const year =
       new Date().getFullYear();
 
-   
+
  /*
 ------------------------------------------------
 Generate Registration Number
