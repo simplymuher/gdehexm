@@ -36,6 +36,18 @@ body{
     width:80px;
     height:auto;
 }
+.logout{
+    position:fixed;
+    top:10px;
+    left:10px;
+    z-index:1000;
+}
+
+.logout img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
 
 .header{
     text-align:center;
@@ -208,10 +220,18 @@ footer{
 
 <div class="container">
 
+<div class="logout">
+    <a href="https://garissadigitaltraining.onrender.com">
+        <img src="/logout.png" alt="Exit">
+    </a>
+</div>
+
+
     <!-- Logo -->
     <div class="logo">
         <img src="gdeh_logo.png" alt="GDEH Logo">
     </div>
+    
 
     <!-- Header -->
     <div class="header">
@@ -219,6 +239,7 @@ footer{
         <h2>END OF TRAINING EXAM</h2>
         <p>P.O BOX 10 70100 GARISSA</p>
     </div>
+
 
     <!-- Instructions -->
     <div class="instructions">
