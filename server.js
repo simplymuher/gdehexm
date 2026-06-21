@@ -72,6 +72,9 @@ await pool.query(
   INSERT INTO exam_sessions
   (reg_number, session_id, exam_started)
   VALUES ($1, $2, false)
+  ON CONFLICT (reg_number)
+  DO UPDATE SET
+    session_id = EXCLUDED.session_id
   `,
   [regNumber, sessionId]
 );
