@@ -41,15 +41,12 @@ pool.connect()
   .catch(err => {
     console.error("❌ Database Error:", err);
   });
-
-
+  
 app.post("/login", async (req, res) => {
+  try {
+    console.log("LOGIN ROUTE HIT");
 
-    try {
-
-        console.log("LOGIN ROUTE HIT");
-
-        const { username, password } = req.body;
+    const { username, password } = req.body;
 
         console.log("Username:", username);
         console.log("Password:", password);
@@ -60,61 +57,39 @@ app.post("/login", async (req, res) => {
             [password]
         );
 
-        if (!student.rows[0]) {
-            return res.json({
-                success: false,
-                message: "Invalid registration number"
-            });
-        }
-
-        // Check if already started/completed
-        const sessionCheck = await pool.query(
-            "SELECT * FROM exam_sessions WHERE reg_number = $1",
-            [password]
-        );
-
-        const existing = sessionCheck.rows[0];
-
-        if (existing && existing.exam_completed) {
-            return res.json({
-                success: false,
-                message: "You already completed this exam"
-            });
-        }
-
-        if (existing && existing.exam_started) {
-            return res.json({
-                success: false,
-                message: "Exam already started"
-            });
-        }
-
-        // Create session
-        const sessionId = require("uuid").v4();
-
-        await pool.query(
-            `INSERT INTO exam_sessions
-             (reg_number, session_id, exam_started)
-             VALUES ($1, $2, true)`,
-            [password, sessionId]
-        );
-
-        res.json({
-            success: true,
-            sessionId
-        });
-
-    } catch (err) {
-
-        console.error("LOGIN ERROR:", err);
-
-        res.status(500).json({
-            success: false,
-            message: "Login failed"
-        });
-
+    if (!student.rows[0]) {
+      return res.json({
+        success: false,
+        message: "Invalid registration number"
+      });
     }
 
+    // 2. Create or reuse session (DO NOT check exam status here)
+    const regNumber = student.rows[0].reg_number;
+const sessionId = require("uuid").v4();
+await pool.query(
+  `
+  INSERT INTO exam_sessions
+  (reg_number, session_id, exam_started)
+  VALUES ($1, $2, false)
+  `,
+  [regNumber, sessionId]
+);
+
+    return res.json({
+      success: true,
+      sessionId,
+      student: student.rows[0]
+    });
+
+  } catch (err) {
+    console.error("LOGIN ERROR:", err);
+
+    res.status(500).json({
+      success: false,
+      message: "Login failed"
+    });
+  }
 });
 
 /*
@@ -583,13 +558,11 @@ app.post("/submit", async (req, res) => {
       });
     }
 
-    /*
-    ------------------------------------------------
-    VERIFY SESSION (NEW SECURITY LAYER)
-    ------------------------------------------------
-    */
+  const verifyExamSession = async (req, res, next) => {
+  try {
+    const { sessionId, regNumber } = req.body;
 
-    const sessionCheck = await pool.query(
+    const result = await pool.query(
       `
       SELECT *
       FROM exam_sessions
@@ -599,7 +572,7 @@ app.post("/submit", async (req, res) => {
       [sessionId, regNumber]
     );
 
-    const session = sessionCheck.rows[0];
+    const session = result.rows[0];
 
     if (!session) {
       return res.status(401).json({
@@ -607,13 +580,23 @@ app.post("/submit", async (req, res) => {
       });
     }
 
-    if (session.exam_completed) {
+    // ONLY block if SUBMITTED
+    if (session.exam_completed === true) {
       return res.status(403).json({
         error: "You already submitted this exam"
       });
     }
 
-    /*
+    // allow ACTIVE or NOT STARTED
+    req.sessionData = session;
+    next();
+
+  } catch (err) {
+    console.error("SESSION VERIFY ERROR:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+/*
 -----------------------------------------------------------------------
 Load Exam Questions
 20 Questions Total
@@ -1386,15 +1369,17 @@ if (existingStudent.rows.length === 0) {
     (
       student_name,
       reg_number,
-      course_name
+      course_name,
+      email
     )
     VALUES
-    ($1,$2,$3)
+    ($1,$2,$3,$4)
     `,
     [
       fullName,
       regNumber,
-      courseName
+      courseName,
+      email
     ]
   );
 
