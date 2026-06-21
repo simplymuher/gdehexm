@@ -1277,7 +1277,7 @@ console.log("🔥 APPLY ROUTE HIT");
     else if (courseName === "Smartphone Literacy") {
       courseCode = "SL";
     }
-    else if (courseName === "ICT") {
+    else if (courseName === "ICT Short Courses") {
       courseCode = "ICT";
     }
 
