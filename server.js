@@ -1019,6 +1019,11 @@ app.get(
 
   }
 );
+app.get("/verify", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "public", "verify.html")
+  );
+});
 
 app.get("/verify/:regNumber", async (req, res) => {
   try {

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GDEH Verification Portal</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#ffffff;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:500px;
+    background:#fff;
+    border-radius:12px;
+    padding:30px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    border-top:5px solid #ff8c00;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo h1{
+    color:#0b1f3a;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.logo p{
+    color:#555;
+    font-size:14px;
+}
+
+h2{
+    color:#0b1f3a;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    color:#ff8c00;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#0b1f3a;
+}
+
+button{
+    width:100%;
+    background:#0b1f3a;
+    color:#fff;
+    border:none;
+    padding:14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+button:hover{
+    background:#ff8c00;
+}
+
+.home-link{
+    text-align:center;
+    margin-top:20px;
+}
+
+.home-link a{
+    text-decoration:none;
+    color:#0b1f3a;
+    font-weight:bold;
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+    font-size:13px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <h1>GDEH CBO</h1>
+        <p>Garissa Digital Empowerment Hub</p>
+    </div>
+
+    <h2>Document Verification Portal</h2>
+
+    <form id="verifyForm">
+
+        <label for="reg">
+            Registration Number
+        </label>
+
+        <input
+            type="text"
+            id="reg"
+            name="reg"
+            placeholder="Enter Registration Number"
+            required
+        >
+
+        <button type="submit">
+            Verify Document
+        </button>
+
+    </form>
+
+    <div class="home-link">
+        <a href="/">
+            ← Back to Home
+        </a>
+    </div>
+
+    <div class="footer">
+        Verify Certificates, Result Slips and Exam Cards
+    </div>
+
+</div>
+<script>
+document.getElementById("verifyForm")
+.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const reg =
+      document.getElementById("reg")
+      .value
+      .trim();
+
+    window.location.href =
+      "/verify/" + encodeURIComponent(reg);
+});
+</script>
+
+</body>
+</html>
