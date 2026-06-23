@@ -950,7 +950,38 @@ Mark Questions
       );
 
     }
+/*
+------------------------------------------------
+Lock Student
+------------------------------------------------
+*/
 
+await pool.query(
+  `
+  UPDATE students
+  SET exam_completed = TRUE
+  WHERE id = $1
+  `,
+  [studentId]
+);
+
+/*
+------------------------------------------------
+Close Session
+------------------------------------------------
+*/
+
+await pool.query(
+  `
+  UPDATE exam_sessions
+  SET exam_completed = TRUE
+  WHERE reg_number = $1
+  `,
+  [regNumber]
+);
+
+    /*
+  
     /*
     ------------------------------------------------
     Response
