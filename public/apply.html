@@ -1,646 +1,2600 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
 
-<title>GDEH Online Admission</title>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GDEH Trainee Registration & Online Admission</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 
 <style>
 
-body{
-    font-family:Arial,sans-serif;
-    background:#ffffff;
-    color:#0B1F4D;
+/* =====================================================
+   ROOT
+===================================================== */
+
+:root{
+    --corporate-red:#C00000;
+    --dark:#222;
+    --muted:#666;
+    --border:#ddd;
+    --light:#fafafa;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
     margin:0;
-    padding:20px;
-}
-
-.container{
-    max-width:700px;
-    margin:auto;
-}
-
-.logo{
-    text-align:center;
-}
-
-.logo img{
-    width:110px;
-}
-h1{
-    text-align:center;
-    font-size:20px;
-    margin:10px 0;
-    color:#0B1F4D;
-}
-
-h2{
-    text-align:center;
-    font-size:18px;
-    margin:10px 0;
-    color:#0B1F4D;
-}
-
-form{
-    margin-top:20px;
-}
-
-label{
-    display:block;
-    font-size:10px;
-    font-weight:600;
-    margin-top:12px;
-    margin-bottom:4px;
-    color:#0B1F4D;
-}
-
-input,
-select{
-    width:100%;
-    padding:10px;
-    border:1px solid #ccc;
-    border-radius:6px;
+    padding:0;
     box-sizing:border-box;
 }
 
-.consent{
-    text-align:center;
-    margin-top:20px;
-    font-size:12px;
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+    background:#fff;
+    color:var(--dark);
+    font-family:"Poppins","Segoe UI",Arial,sans-serif;
+    font-size:11px;
+    line-height:1.6;
 }
 
-button{
-    width:100%;
-    padding:12px;
-    margin-top:20px;
-    background:#0B1F4D;
-    color:white;
-    border:none;
-    border-radius:6px;
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:13px 20px;
+
+    background:#fff;
+
+    border-bottom:3px solid var(--corporate-red);
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+
+    width:62px;
+    height:auto;
+
+    object-fit:contain;
+}
+
+
+/* =====================================================
+   BACK HOME
+===================================================== */
+
+.back-home{
+
+    display:inline-flex;
+    align-items:center;
+
+    color:#222;
+
+    text-decoration:none;
+
+    font-size:10px;
+    font-weight:600;
+
+    padding:6px 11px;
+
+    border:1px solid #ddd;
+
+    border-radius:5px;
+
+    transition:.25s;
+}
+
+.back-home:hover{
+
+    color:#fff;
+
+    background:var(--corporate-red);
+
+    border-color:var(--corporate-red);
+}
+
+
+/* =====================================================
+   PAGE INTRO
+===================================================== */
+
+.page-intro{
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding:22px 15px 10px;
+
+    text-align:center;
+}
+
+.page-intro h1{
+
+    color:var(--corporate-red);
+
+    font-size:19px;
+
+    font-weight:700;
+
+    letter-spacing:.2px;
+
+    line-height:1.3;
+}
+
+.page-intro p{
+
+    color:#222;
+
+    font-family:"Allura",cursive;
+
     font-size:14px;
+
+    font-weight:700;
+
+    line-height:1.1;
+
+    margin-top:2px;
+}
+
+.intro-line{
+
+    width:48px;
+
+    height:2px;
+
+    background:var(--corporate-red);
+
+    border-radius:10px;
+
+    margin:10px auto 0;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding:7px 18px 35px;
+}
+
+
+/* =====================================================
+   FORM SECTION
+===================================================== */
+
+.form-section{
+
+    margin-top:18px;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title{
+
+    color:var(--corporate-red);
+
+    font-family:"Poppins",sans-serif;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    margin:0 0 7px;
+
+    padding-left:7px;
+
+    border-left:3px solid var(--corporate-red);
+
+    line-height:1.25;
+
+    letter-spacing:.1px;
+}
+
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.form-card{
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-radius:6px;
+
+    padding:14px 16px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.035);
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:0 16px;
+}
+
+.full-width{
+
+    grid-column:1 / -1;
+}
+
+
+/* =====================================================
+   LABELS
+===================================================== */
+
+label{
+
+    display:block;
+
+    color:#222;
+
+    font-size:10px;
+
+    font-weight:600;
+
+    margin:9px 0 4px;
+}
+
+.required{
+
+    color:var(--corporate-red);
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:8px 9px;
+
+    background:#fff;
+
+    border:1px solid #ccc;
+
+    border-radius:5px;
+
+    color:#222;
+
+    font-family:"Poppins",sans-serif;
+
+    font-size:10px;
+
+    transition:.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--corporate-red);
+
+    box-shadow:0 0 0 2px rgba(192,0,0,.07);
+}
+
+textarea{
+
+    min-height:75px;
+
+    resize:vertical;
+}
+
+
+/* =====================================================
+   RADIO / CHECKBOX
+===================================================== */
+
+.option-group{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px 18px;
+
+    margin-top:5px;
+}
+
+.option-group label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin:0;
+
+    font-size:10px;
+
+    font-weight:500;
+}
+
+.option-group input{
+
+    width:auto;
+
+    accent-color:var(--corporate-red);
+}
+
+
+/* =====================================================
+   FILE INPUT
+===================================================== */
+
+.file-input{
+
+    padding:6px;
+}
+
+.file-input::file-selector-button{
+
+    background:var(--corporate-red);
+
+    color:#fff;
+
+    border:0;
+
+    border-radius:4px;
+
+    padding:6px 9px;
+
+    margin-right:7px;
+
+    font-family:"Poppins",sans-serif;
+
+    font-size:9px;
+
     cursor:pointer;
 }
 
-button:hover{
-    opacity:0.9;
+
+/* =====================================================
+   DECLARATION
+===================================================== */
+
+.declaration{
+
+    background:#fafafa;
+
+    border-left:3px solid var(--corporate-red);
+
+    padding:10px 12px;
+
+    margin-top:5px;
 }
 
-footer{
+.declaration p{
+
+    color:#444;
+
+    font-size:9.5px;
+
+    line-height:1.65;
+}
+
+.agreement{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:7px;
+
+    margin-top:10px;
+}
+
+.agreement input{
+
+    width:auto;
+
+    margin-top:3px;
+
+    accent-color:var(--corporate-red);
+}
+
+.agreement label{
+
+    margin:0;
+
+    font-size:9.5px;
+
+    font-weight:500;
+
+    line-height:1.5;
+}
+
+.agreement a{
+
+    color:var(--corporate-red);
+
+    text-decoration:none;
+}
+
+
+/* =====================================================
+   SUBMIT
+===================================================== */
+
+.submit-btn{
+
+    display:block;
+
+    margin:22px auto 5px;
+
+    padding:9px 25px;
+
+    background:var(--corporate-red);
+
+    color:#fff;
+
+    border:0;
+
+    border-radius:5px;
+
+    font-family:"Poppins",sans-serif;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.submit-btn:hover{
+
+    transform:translateY(-1px);
+
+    box-shadow:0 5px 12px rgba(192,0,0,.15);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+    margin-top:25px;
+
+    padding:17px 12px;
+
+    background:#fff;
+
+    border-top:3px solid var(--corporate-red);
+
     text-align:center;
-    margin-top:30px;
-    font-size:12px;
-    color:#0B1F4D;
+}
+
+.footer p{
+
+    color:#555;
+
+    font-size:9.5px;
+
+    margin:3px 0;
+}
+
+.footer p:first-child{
+
+    color:#222;
+
+    font-weight:600;
+}
+
+.footer a{
+
+    color:#555;
+
+    text-decoration:none;
+}
+
+.footer a:hover{
+
+    color:var(--corporate-red);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .header{
+
+        padding:11px 14px;
+    }
+
+    .logo{
+
+        width:55px;
+    }
+
+    .container{
+
+        padding:6px 12px 28px;
+    }
+
+    .page-intro{
+
+        padding:19px 10px 8px;
+    }
+
+    .page-intro h1{
+
+        font-size:16px;
+    }
+
+    .page-intro p{
+
+        font-size:13px;
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .full-width{
+
+        grid-column:auto;
+    }
+
+    .form-card{
+
+        padding:13px;
+    }
+
+    .section-title{
+
+        font-size:9.5px;
+    }
+
+    .option-group{
+
+        flex-direction:column;
+
+        gap:7px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media(max-width:430px){
+
+    body{
+
+        font-size:10px;
+    }
+
+    .back-home{
+
+        font-size:9px;
+
+        padding:5px 8px;
+    }
+
+    .page-intro h1{
+
+        font-size:15px;
+    }
+
+    .page-intro p{
+
+        font-size:13px;
+    }
+
+    .section-title{
+
+        font-size:9px;
+    }
+
+    input,
+    select,
+    textarea{
+
+        font-size:10px;
+
+        padding:8px;
+    }
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+@media print{
+
+    body{
+
+        background:#fff;
+    }
+
+    .header{
+
+        position:static;
+    }
+
+    .back-home,
+    .submit-btn{
+
+        display:none;
+    }
+
+    .form-card{
+
+        box-shadow:none;
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <img
+        src="gdeh_logo.png"
+        alt="Garissa Digital Empowerment Hub Logo"
+        class="logo"
+    >
+
+    <a
+        href="index.html"
+        class="back-home"
+    >
+        ← Back to Home
+    </a>
+
+</header>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<div class="page-intro">
+
+    <h1>
+        TRAINEE REGISTRATION FORM
+    </h1>
+
+    <p>
+        Registration for participants joining GDEH training programmes
+    </p>
+
+    <div class="intro-line"></div>
+
+</div>
+
+
+<!-- =====================================================
+     FORM
+===================================================== -->
+
 <div class="container">
 
-<div class="logo">
-<img src="gdeh_logo.png">
+<form
+    id="traineeForm"
+    enctype="multipart/form-data"
+>
+
+
+<!-- =====================================================
+     A. PERSONAL INFORMATION
+===================================================== -->
+
+<section class="form-section">
+
+<h2 class="section-title">
+    A. Personal Information
+</h2>
+
+<div class="form-card">
+
+<div class="form-grid">
+
+
+<div>
+
+<label>
+    First Name <span class="required">*</span>
+</label>
+
+<input
+    type="text"
+    id="firstName"
+    name="firstName"
+    placeholder="Enter first name"
+    required
+>
+
 </div>
 
-<h1>
-GARISSA DIGITAL EMPOWERMENT HUB CBO
-</h1>
-<h2> Online Admission Form</h2>
 
-<form id="applicationForm">
+<div>
 
-<label>Full Names</label>
-<input type="text" id="fullName" name="fullName" required>
+<label>
+    Middle Name
+</label>
 
-<label>Gender</label>
-<select id="gender" name="gender" required>
-  <option value="">Select</option>
-  <option>Male</option>
-  <option>Female</option>
-</select>
+<input
+    type="text"
+    id="middleName"
+    name="middleName"
+    placeholder="Enter middle name"
+>
 
-<label>Date of Birth</label>
-<input type="date" id="dateOfBirth" name="dob" required>
-
-<label>Email Address</label>
-<input type="email" id="email" name="email">
-
-<label>Phone Number</label>
-<input type="tel" id="phone" name="phone" required>
-
-<label>County</label>
-<select id="county" required>
-  <option value="">Select County</option>
-</select>
-
-<label>Sub County</label>
-<select id="subCounty" required>
-  <option value="">Select Sub County</option>
-</select>
-
-<label>Ward</label>
-<select id="ward" required>
-  <option value="">Select Ward</option>
-</select>
-
-<label>Next of Kin</label>
-<input type="text" id="nextOfKin" name="nextOfKin" required>
-
-<label>Course Applying For</label>
-<select id="courseName" name="course" required>
-  <option value="">Select Course</option>
-  <option>Computer Packages</option>
-  <option>Agro Entrepreneurship</option>
-  <option>Smartphone Literacy</option>
-  <option>ICT Short Courses</option>
-</select>
-
-<label>Study Session</label>
-<select id="studySession" name="session" required>
-  <option value="">Select Session</option>
-  <option>Morning</option>
-  <option>Afternoon</option>
-  <option>Evening</option>
-  <option>Holiday Based</option>
-</select>
-
-<label>Where Did You Hear About Us? (Optional)</label>
-<input type="text" id="referralSource" name="referral">
-
-<div class="consent">
-  <label>
-    <input type="checkbox" id="consent" required>
-    I confirm that the information provided is true and correct.
-  </label>
 </div>
 
-<button type="submit">
-  Submit Application
+
+<div>
+
+<label>
+    Last Name <span class="required">*</span>
+</label>
+
+<input
+    type="text"
+    id="lastName"
+    name="lastName"
+    placeholder="Enter last name"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label>
+    National ID / Passport Number
+    <span class="required">*</span>
+</label>
+
+<input
+    type="text"
+    id="nationalId"
+    name="nationalId"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Date of Birth <span class="required">*</span>
+</label>
+
+<input
+    type="date"
+    id="dateOfBirth"
+    name="dateOfBirth"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Gender <span class="required">*</span>
+</label>
+
+<select
+    id="gender"
+    name="gender"
+    required
+>
+
+<option value="">
+    Select Gender
+</option>
+
+<option>Male</option>
+<option>Female</option>
+<option>Prefer not to say</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+    Phone Number <span class="required">*</span>
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    name="phone"
+    placeholder="e.g. 0712345678"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Email Address
+</label>
+
+<input
+    type="email"
+    id="email"
+    name="email"
+>
+
+</div>
+
+
+<div>
+
+<label>
+    County <span class="required">*</span>
+</label>
+
+<select
+    id="county"
+    name="county"
+    required
+>
+
+<option value="">
+    Select County
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+    Sub-County <span class="required">*</span>
+</label>
+
+<select
+    id="subCounty"
+    name="subCounty"
+    required
+>
+
+<option value="">
+    Select Sub County
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+    Ward <span class="required">*</span>
+</label>
+
+<select
+    id="ward"
+    name="ward"
+    required
+>
+
+<option value="">
+    Select Ward
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+    Physical / Residential Address
+</label>
+
+<input
+    type="text"
+    id="address"
+    name="address"
+>
+
+</div>
+
+
+<div class="full-width">
+
+<label>
+    Next of Kin <span class="required">*</span>
+</label>
+
+<input
+    type="text"
+    id="nextOfKin"
+    name="nextOfKin"
+    required
+>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     B. EDUCATION & BACKGROUND
+===================================================== -->
+
+<section class="form-section">
+
+<h2 class="section-title">
+    B. Education &amp; Background
+</h2>
+
+<div class="form-card">
+
+<div class="form-grid">
+
+
+<div>
+
+<label>
+    Highest Education Level
+    <span class="required">*</span>
+</label>
+
+<select
+    id="educationLevel"
+    name="educationLevel"
+    required
+>
+
+<option value="">
+    Select Education Level
+</option>
+
+<option>Primary</option>
+<option>Secondary</option>
+<option>Certificate</option>
+<option>Diploma</option>
+<option>Degree</option>
+<option>Postgraduate</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+    Current Occupation
+</label>
+
+<input
+    type="text"
+    id="occupation"
+    name="occupation"
+    placeholder="Student, employed, business, etc."
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Employment Status
+    <span class="required">*</span>
+</label>
+
+<select
+    id="employmentStatus"
+    name="employmentStatus"
+    required
+>
+
+<option value="">
+    Select Status
+</option>
+
+<option>Employed</option>
+<option>Self-employed</option>
+<option>Student</option>
+<option>Unemployed</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+    Previous Digital Training
+</label>
+
+<select
+    id="previousTraining"
+    name="previousTraining"
+>
+
+<option value="">
+    Select
+</option>
+
+<option>Yes</option>
+<option>No</option>
+
+</select>
+
+</div>
+
+
+<div class="full-width">
+
+<label>
+    Relevant Skills / Qualifications
+</label>
+
+<textarea
+    id="skills"
+    name="skills"
+    placeholder="Briefly describe your relevant skills, qualifications or experience..."
+></textarea>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     C. TRAINING PROGRAMME
+===================================================== -->
+
+<section class="form-section">
+
+<h2 class="section-title">
+    C. Training Programme
+</h2>
+
+<div class="form-card">
+
+
+<label>
+    Programme / Course Applying For
+    <span class="required">*</span>
+</label>
+
+<select
+    id="courseName"
+    name="courseName"
+    required
+>
+
+<option value="">
+    Select Training Programme
+</option>
+
+<option>Basic Digital Literacy</option>
+<option>Computer Packages</option>
+<option>Computer Applications</option>
+<option>Internet &amp; Online Safety</option>
+<option>Smartphone Literacy</option>
+<option>Digital Entrepreneurship</option>
+<option>Graphic Design</option>
+<option>Digital Marketing</option>
+<option>Online Work &amp; Freelancing</option>
+<option>Agro-Entrepreneurship</option>
+<option>ICT Short Courses</option>
+<option>Other</option>
+
+</select>
+
+
+<label>
+    Preferred Training Schedule
+    <span class="required">*</span>
+</label>
+
+<div class="option-group">
+
+<label>
+<input
+    type="radio"
+    name="schedule"
+    value="Morning"
+    required
+>
+Morning
+</label>
+
+<label>
+<input
+    type="radio"
+    name="schedule"
+    value="Afternoon"
+>
+Afternoon
+</label>
+
+<label>
+<input
+    type="radio"
+    name="schedule"
+    value="Evening"
+>
+Evening
+</label>
+
+<label>
+<input
+    type="radio"
+    name="schedule"
+    value="Holiday Based"
+>
+Holiday Based
+</label>
+
+</div>
+
+
+<label>
+    Preferred Training Mode
+    <span class="required">*</span>
+</label>
+
+<div class="option-group">
+
+<label>
+<input
+    type="radio"
+    name="trainingMode"
+    value="Physical"
+    required
+>
+Physical
+</label>
+
+<label>
+<input
+    type="radio"
+    name="trainingMode"
+    value="Online"
+>
+Online
+</label>
+
+<label>
+<input
+    type="radio"
+    name="trainingMode"
+    value="Hybrid"
+>
+Hybrid
+</label>
+
+</div>
+
+
+<label>
+    What do you hope to achieve from this training?
+    <span class="required">*</span>
+</label>
+
+<textarea
+    id="trainingExpectations"
+    name="trainingExpectations"
+    placeholder="Tell us what you hope to learn or achieve..."
+    required
+></textarea>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     D. DIGITAL ACCESS & INCLUSION
+===================================================== -->
+
+<section class="form-section">
+
+<h2 class="section-title">
+    D. Digital Access &amp; Inclusion
+</h2>
+
+<div class="form-card">
+
+
+<label>
+    Do you currently have access to a computer?
+    <span class="required">*</span>
+</label>
+
+<div class="option-group">
+
+<label>
+<input
+    type="radio"
+    name="computerAccess"
+    value="Yes"
+    required
+>
+Yes
+</label>
+
+<label>
+<input
+    type="radio"
+    name="computerAccess"
+    value="No"
+>
+No
+</label>
+
+<label>
+<input
+    type="radio"
+    name="computerAccess"
+    value="Shared Access"
+>
+Shared Access
+</label>
+
+</div>
+
+
+<label>
+    Do you have regular internet access?
+    <span class="required">*</span>
+</label>
+
+<div class="option-group">
+
+<label>
+<input
+    type="radio"
+    name="internetAccess"
+    value="Yes"
+    required
+>
+Yes
+</label>
+
+<label>
+<input
+    type="radio"
+    name="internetAccess"
+    value="No"
+>
+No
+</label>
+
+<label>
+<input
+    type="radio"
+    name="internetAccess"
+    value="Limited"
+>
+Limited
+</label>
+
+</div>
+
+
+<label>
+    Do you consider yourself a person with a disability?
+</label>
+
+<div class="option-group">
+
+<label>
+<input
+    type="radio"
+    name="disability"
+    value="Yes"
+>
+Yes
+</label>
+
+<label>
+<input
+    type="radio"
+    name="disability"
+    value="No"
+>
+No
+</label>
+
+<label>
+<input
+    type="radio"
+    name="disability"
+    value="Prefer not to say"
+>
+Prefer not to say
+</label>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     E. EMERGENCY CONTACT
+===================================================== -->
+
+<section class="form-section">
+
+<h2 class="section-title">
+    E. Emergency Contact
+</h2>
+
+<div class="form-card">
+
+<div class="form-grid">
+
+
+<div>
+
+<label>
+    Emergency Contact Name
+    <span class="required">*</span>
+</label>
+
+<input
+    type="text"
+    id="emergencyName"
+    name="emergencyName"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Relationship
+    <span class="required">*</span>
+</label>
+
+<input
+    type="text"
+    id="emergencyRelationship"
+    name="emergencyRelationship"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Emergency Contact Phone
+    <span class="required">*</span>
+</label>
+
+<input
+    type="tel"
+    id="emergencyPhone"
+    name="emergencyPhone"
+    required
+>
+
+</div>
+
+
+<div>
+
+<label>
+    Alternative Contact
+</label>
+
+<input
+    type="tel"
+    id="alternativePhone"
+    name="alternativePhone"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     F. SUPPORTING DOCUMENTS
+===================================================== -->
+
+<section class="form-section">
+
+<h2 class="section-title">
+    F. Supporting Documents
+</h2>
+
+<div class="form-card">
+
+
+<label>
+    Upload Identification Document
+</label>
+
+<input
+    type="file"
+    id="identificationDocument"
+    name="identificationDocument"
+    class="file-input"
+    accept=".pdf,.jpg,.jpeg,.png"
+>
+
+
+<label>
+    Passport / Profile Photo
+</label>
+
+<input
+    type="file"
+    id="profilePhoto"
+    name="profilePhoto"
+    class="file-input"
+    accept=".jpg,.jpeg,.png"
+>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     G. DECLARATION
+===================================================== -->
+
+<section class="form-section">
+
+<h2 class="section-title">
+    G. Declaration &amp; Consent
+</h2>
+
+<div class="form-card">
+
+
+<div class="declaration">
+
+<p>
+
+I declare that the information provided in this
+registration form is accurate and complete to the
+best of my knowledge. I understand that the
+information will be used for trainee registration,
+programme administration, communication, monitoring
+and reporting purposes.
+
+</p>
+
+</div>
+
+
+<div class="agreement">
+
+<input
+    type="checkbox"
+    id="consent"
+    name="consent"
+    required
+>
+
+<label for="consent">
+
+I confirm that I have read and agree to the
+
+<a
+    href="privacy_terms.html"
+    target="_blank"
+>
+Privacy Policy &amp; Terms and Conditions
+</a>.
+
+<span class="required">*</span>
+
+</label>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SUBMIT
+===================================================== -->
+
+<button
+    type="submit"
+    class="submit-btn"
+    id="submitBtn"
+>
+
+Submit Trainee Registration
+
 </button>
+
+
 </form>
 
-<footer>
-© GDEH CBO All Rights Reserved
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+<p>
+© 2026 Garissa Digital Empowerment Hub CBO.
+All Rights Reserved.
+</p>
+
+<p>
+
+<a href="privacy_terms.html">
+Privacy Policy
+</a>
+
+&nbsp; | &nbsp;
+
+<a href="privacy_terms.html">
+Terms &amp; Conditions
+</a>
+
+</p>
+
 </footer>
 
-</div>
+
 <script>
 
-/*
-------------------------------------------------
-Load Counties
-------------------------------------------------
-*/
+/* =====================================================
+   LOAD COUNTIES
+===================================================== */
 
-async function loadCounties() {
+async function loadCounties(){
 
-  const res =
-    await fetch("/api/counties");
+    try{
 
-  const counties =
-    await res.json();
+        const response =
+            await fetch("/api/counties");
 
-  const county =
-    document.getElementById("county");
+        if(!response.ok){
 
-  county.innerHTML =
-    '<option value="">Select County</option>';
+            throw new Error(
+                "Unable to load counties"
+            );
 
-  counties.forEach(item => {
+        }
 
-    county.innerHTML +=
-      `<option value="${item.county}">
-        ${item.county}
-      </option>`;
+        const counties =
+            await response.json();
 
-  });
+        const county =
+            document.getElementById("county");
+
+        county.innerHTML =
+            '<option value="">Select County</option>';
+
+        counties.forEach(item => {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                item.county;
+
+            option.textContent =
+                item.county;
+
+            county.appendChild(option);
+
+        });
+
+    }catch(error){
+
+        console.error(
+            "County loading error:",
+            error
+        );
+
+    }
 
 }
 
-/*
-------------------------------------------------
-Load Sub Counties
-------------------------------------------------
-*/
+
+/* =====================================================
+   LOAD SUB COUNTIES
+===================================================== */
 
 document
 .getElementById("county")
 .addEventListener(
-  "change",
-  async function () {
+    "change",
+    async function(){
 
-    const county =
-      this.value;
+        const county =
+            this.value;
 
-    const res =
-      await fetch(
-        `/api/subcounties/${encodeURIComponent(county)}`
-      );
+        const subCounty =
+            document.getElementById(
+                "subCounty"
+            );
 
-    const data =
-      await res.json();
+        const ward =
+            document.getElementById(
+                "ward"
+            );
 
-    const subCounty =
-      document.getElementById("subCounty");
+        subCounty.innerHTML =
+            '<option value="">Select Sub County</option>';
 
-    subCounty.innerHTML =
-      '<option value="">Select Sub County</option>';
+        ward.innerHTML =
+            '<option value="">Select Ward</option>';
 
-    data.forEach(item => {
+        if(!county){
 
-      subCounty.innerHTML +=
-        `<option value="${item.sub_county}">
-          ${item.sub_county}
-        </option>`;
+            return;
 
-    });
+        }
 
-    document.getElementById("ward")
-      .innerHTML =
-      '<option value="">Select Ward</option>';
+        try{
 
-  }
+            const response =
+                await fetch(
+                    `/api/subcounties/${encodeURIComponent(county)}`
+                );
+
+            if(!response.ok){
+
+                throw new Error(
+                    "Unable to load sub-counties"
+                );
+
+            }
+
+            const data =
+                await response.json();
+
+            data.forEach(item => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value =
+                    item.sub_county;
+
+                option.textContent =
+                    item.sub_county;
+
+                subCounty.appendChild(option);
+
+            });
+
+        }catch(error){
+
+            console.error(
+                "Sub-county loading error:",
+                error
+            );
+
+        }
+
+    }
 );
 
-/*
-------------------------------------------------
-Load Wards
-------------------------------------------------
-*/
+
+/* =====================================================
+   LOAD WARDS
+===================================================== */
 
 document
 .getElementById("subCounty")
 .addEventListener(
-  "change",
-  async function () {
+    "change",
+    async function(){
 
-    const county =
-      document.getElementById("county").value;
+        const county =
+            document.getElementById(
+                "county"
+            ).value;
 
-    const subCounty =
-      this.value;
+        const subCounty =
+            this.value;
 
-    const res =
-      await fetch(
-        `/api/wards/${encodeURIComponent(county)}/${encodeURIComponent(subCounty)}`
-      );
+        const ward =
+            document.getElementById(
+                "ward"
+            );
 
-    const data =
-      await res.json();
+        ward.innerHTML =
+            '<option value="">Select Ward</option>';
 
-    const ward =
-      document.getElementById("ward");
+        if(!county || !subCounty){
 
-    ward.innerHTML =
-      '<option value="">Select Ward</option>';
+            return;
 
-    data.forEach(item => {
+        }
 
-      ward.innerHTML +=
-        `<option value="${item.ward}">
-          ${item.ward}
-        </option>`;
+        try{
 
-    });
+            const response =
+                await fetch(
+                    `/api/wards/${encodeURIComponent(county)}/${encodeURIComponent(subCounty)}`
+                );
 
-  }
-);
+            if(!response.ok){
 
-/*
-------------------------------------------------
-Submit Application
-------------------------------------------------
-*/
+                throw new Error(
+                    "Unable to load wards"
+                );
 
-document
-.getElementById("applicationForm")
-.addEventListener(
-  "submit",
-  async function (e) {
+            }
 
-    e.preventDefault();
+            const data =
+                await response.json();
 
-    const consent =
-      document.getElementById("consent");
+            data.forEach(item => {
 
-    if (!consent.checked) {
+                const option =
+                    document.createElement("option");
 
-      alert(
-        "Please accept the declaration."
-      );
+                option.value =
+                    item.ward;
 
-      return;
+                option.textContent =
+                    item.ward;
+
+                ward.appendChild(option);
+
+            });
+
+        }catch(error){
+
+            console.error(
+                "Ward loading error:",
+                error
+            );
+
+        }
 
     }
+);
 
-    const payload = {
 
-      fullName:
-        document.getElementById("fullName").value,
+/* =====================================================
+   SUBMIT APPLICATION
+===================================================== */
 
-      gender:
-        document.getElementById("gender").value,
+document
+.getElementById("traineeForm")
+.addEventListener(
+    "submit",
+    async function(event){
 
-      dateOfBirth:
-        document.getElementById("dateOfBirth").value,
+        event.preventDefault();
 
-      email:
-        document.getElementById("email").value,
+        const consent =
+            document.getElementById(
+                "consent"
+            );
 
-      phone:
-        document.getElementById("phone").value,
+        if(!consent.checked){
 
-      county:
-        document.getElementById("county").value,
+            alert(
+                "Please accept the Privacy Policy and Terms & Conditions before submitting."
+            );
 
-      subCounty:
-        document.getElementById("subCounty").value,
+            return;
 
-      ward:
-        document.getElementById("ward").value,
+        }
 
-      nextOfKin:
-        document.getElementById("nextOfKin").value,
 
-      courseName:
-        document.getElementById("courseName").value,
+        const submitBtn =
+            document.getElementById(
+                "submitBtn"
+            );
 
-      studySession:
-        document.getElementById("studySession").value,
+        submitBtn.disabled =
+            true;
 
-      referralSource:
-        document.getElementById("referralSource").value
+        submitBtn.textContent =
+            "Submitting...";
 
-    };
 
-    try {
+        /* =============================================
+           COLLECT FORM DATA
+        ============================================= */
 
-      const response =
-        await fetch(
-          "/apply",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-            body:
-              JSON.stringify(payload)
-          }
-        );
+        const formData =
+            new FormData(this);
 
-      const result =
-        await response.json();
 
-      if (!result.success) {
+        /*
+        Convert radio values into standard
+        form fields for your existing API.
+        */
 
-        alert(
-          result.error ||
-          "Application failed"
-        );
+        const payload = {
 
-        return;
+            fullName:
+                `${document.getElementById("firstName").value} ${document.getElementById("middleName").value} ${document.getElementById("lastName").value}`
+                .replace(/\s+/g," ")
+                .trim(),
 
-      }
+            firstName:
+                document.getElementById(
+                    "firstName"
+                ).value,
 
-      /*
-      ----------------------------------------
-      Admission Letter
-      ----------------------------------------
-      */
+            middleName:
+                document.getElementById(
+                    "middleName"
+                ).value,
 
-      const letter =
-      window.open(
-        "",
-        "_blank"
-      );
+            lastName:
+                document.getElementById(
+                    "lastName"
+                ).value,
 
-      letter.document.write(`
+            nationalId:
+                document.getElementById(
+                    "nationalId"
+                ).value,
+
+            gender:
+                document.getElementById(
+                    "gender"
+                ).value,
+
+            dateOfBirth:
+                document.getElementById(
+                    "dateOfBirth"
+                ).value,
+
+            email:
+                document.getElementById(
+                    "email"
+                ).value,
+
+            phone:
+                document.getElementById(
+                    "phone"
+                ).value,
+
+            county:
+                document.getElementById(
+                    "county"
+                ).value,
+
+            subCounty:
+                document.getElementById(
+                    "subCounty"
+                ).value,
+
+            ward:
+                document.getElementById(
+                    "ward"
+                ).value,
+
+            address:
+                document.getElementById(
+                    "address"
+                ).value,
+
+            nextOfKin:
+                document.getElementById(
+                    "nextOfKin"
+                ).value,
+
+            educationLevel:
+                document.getElementById(
+                    "educationLevel"
+                ).value,
+
+            occupation:
+                document.getElementById(
+                    "occupation"
+                ).value,
+
+            employmentStatus:
+                document.getElementById(
+                    "employmentStatus"
+                ).value,
+
+            previousTraining:
+                document.getElementById(
+                    "previousTraining"
+                ).value,
+
+            skills:
+                document.getElementById(
+                    "skills"
+                ).value,
+
+            courseName:
+                document.getElementById(
+                    "courseName"
+                ).value,
+
+            studySession:
+                document.querySelector(
+                    'input[name="schedule"]:checked'
+                )?.value || "",
+
+            trainingMode:
+                document.querySelector(
+                    'input[name="trainingMode"]:checked'
+                )?.value || "",
+
+            trainingExpectations:
+                document.getElementById(
+                    "trainingExpectations"
+                ).value,
+
+            computerAccess:
+                document.querySelector(
+                    'input[name="computerAccess"]:checked'
+                )?.value || "",
+
+            internetAccess:
+                document.querySelector(
+                    'input[name="internetAccess"]:checked'
+                )?.value || "",
+
+            disability:
+                document.querySelector(
+                    'input[name="disability"]:checked'
+                )?.value || "",
+
+            emergencyName:
+                document.getElementById(
+                    "emergencyName"
+                ).value,
+
+            emergencyRelationship:
+                document.getElementById(
+                    "emergencyRelationship"
+                ).value,
+
+            emergencyPhone:
+                document.getElementById(
+                    "emergencyPhone"
+                ).value,
+
+            alternativePhone:
+                document.getElementById(
+                    "alternativePhone"
+                ).value
+
+        };
+
+
+        /* =============================================
+           SEND APPLICATION
+        ============================================= */
+
+        try{
+
+            const response =
+                await fetch(
+                    "/apply",
+                    {
+
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if(!response.ok || !result.success){
+
+                throw new Error(
+                    result.error ||
+                    "Application failed"
+                );
+
+            }
+
+
+            /* =========================================
+               CREATE ADMISSION LETTER
+            ========================================= */
+
+            const letter =
+                window.open(
+                    "",
+                    "_blank"
+                );
+
+
+            if(!letter){
+
+                alert(
+                    "Please allow pop-ups to generate your admission letter."
+                );
+
+                return;
+
+            }
+
+
+            letter.document.write(`
+
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<title>Admission Letter</title>
+
+<meta charset="UTF-8">
+
+<title>
+GDEH Official Admission Letter
+</title>
+
 
 <style>
 
 @page{
-  size:A4;
-  margin:12mm;
+
+    size:A4;
+
+    margin:14mm;
 }
+
+
+*{
+
+    box-sizing:border-box;
+}
+
 
 body{
-  font-family:Arial,sans-serif;
-  color:#0B1F4D;
-  background:#fff;
-  padding:0;
-  margin:0;
-  font-size:14px;
-  line-height:1.3;
+
+    margin:0;
+
+    padding:0;
+
+    background:#fff;
+
+    color:#222;
+
+    font-family:Arial,
+                Helvetica,
+                sans-serif;
+
+    font-size:12px;
+
+    line-height:1.45;
 }
+
+
+.header{
+
+    text-align:center;
+
+    border-bottom:2px solid #C00000;
+
+    padding-bottom:8px;
+
+}
+
 
 .logo{
-  text-align:center;
+
+    width:78px;
+
+    height:auto;
+
 }
 
-.logo img{
-  width:90px;
-}
 
 h1{
-  text-align:center;
-  font-size:20px;
-  margin:3px 0;
+
+    color:#C00000;
+
+    font-size:19px;
+
+    margin:4px 0;
+
 }
 
-h2{
-  text-align:center;
-  font-size:16px;
-  margin:6px 0;
+
+.address{
+
+    font-size:10.5px;
+
+    line-height:1.4;
+
 }
 
-p{
-  margin:6px 0;
+
+.title{
+
+    text-align:center;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    margin:12px 0;
+
+    color:#222;
+
 }
 
-.paragraph p{
-  text-align:justify;
-  line-height:1.4;
-  margin:8px 0;
-}
-
-.signature{
-  margin-top:10px;
-}
-
-.signature img{
-  width:100px;
-}
 
 hr{
-  margin:8px 0;
+
+    border:0;
+
+    border-top:1px solid #ccc;
+
+    margin:7px 0;
 }
 
-@media print{
-  body{
-    margin:0;
-    padding:0;
-  }
 
-  .signature,
-  .paragraph{
-    page-break-inside:avoid;
-  }
+.details{
+
+    margin:10px 0;
+
 }
+
+
+.details p{
+
+    margin:4px 0;
+
+}
+
+
+.paragraph{
+
+    text-align:justify;
+
+    line-height:1.55;
+
+}
+
+
+.signature{
+
+    margin-top:22px;
+
+}
+
+
+.signature img{
+
+    width:100px;
+
+    height:auto;
+
+}
+
+
+.footer{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    right:0;
+
+    text-align:center;
+
+    border-top:1px solid #ccc;
+
+    padding-top:5px;
+
+    font-size:9px;
+
+}
+
 
 </style>
+
 </head>
+
 
 <body>
 
-<div class="logo" style="text-align:center;">
-  <img src="/gdeh_logo.png" width="90">
-</div>
 
-<h1 style="text-align:center;">
-  GARISSA DIGITAL EMPOWERMENT HUB CBO
+<div class="header">
+
+<img
+    src="/gdeh_logo.png"
+    class="logo"
+    alt="GDEH Logo"
+>
+
+
+<h1>
+GARISSA DIGITAL EMPOWERMENT HUB CBO
 </h1>
 
-<p style="text-align:center;">
-  Along Kismayu Road Off Rubis Energy<br>
-  Opposite Horizon High School<br>
-  P.O Box 10-70100 Garissa
-</p>
+
+<div class="address">
+
+Along Kismayu Road Off Rubis Energy<br>
+
+Opposite Horizon High School<br>
+
+P.O. Box 10-70100, Garissa
+
+</div>
+
+</div>
+
+
+<div class="title">
+
+OFFICIAL ADMISSION LETTER
+
+</div>
+
 
 <hr>
 
-<h2 style="text-align:center;">
-  OFFICIAL ADMISSION LETTER
-</h2>
-
-<hr>
 
 <p>
-  Date: ${new Date().toLocaleDateString()}
+
+<strong>Date:</strong>
+${new Date().toLocaleDateString()}
+
 </p>
+
 
 <p>
-  Dear <strong>${result.fullName}</strong>,
+
+Dear
+<strong>
+${result.fullName}
+</strong>,
+
 </p>
 
-<br>
 
-<p>
-  <strong>Registration Number:</strong>
-  ${result.regNumber}
-</p>
-
-<p>
-  <strong>Course Admitted:</strong>
-  ${result.courseName}
-</p>
+<div class="details">
 
 <p>
-  <strong>Study Session:</strong>
-  ${result.studySession}
+
+<strong>
+Registration Number:
+</strong>
+
+${result.regNumber}
+
 </p>
+
+
+<p>
+
+<strong>
+Course Admitted:
+</strong>
+
+${result.courseName}
+
+</p>
+
+
+<p>
+
+<strong>
+Study Session:
+</strong>
+
+${result.studySession}
+
+</p>
+
+
+</div>
+
 
 <div class="paragraph">
-<p style="text-align:justify; line-height:1.4;">
-  We are pleased to inform you that following the review
-  of your application, you have successfully met the
-  admission requirements and have been offered a place
-  at Garissa Digital Empowerment Hub CBO. This admission
-  confirms your eligibility to undertake the above course
-  and participate in all academic and training activities
-  organized by the institution.
+
+
+<p>
+
+We are pleased to inform you that following the review
+of your application, you have successfully met the
+admission requirements and have been offered a place
+at Garissa Digital Empowerment Hub CBO. This admission
+confirms your eligibility to undertake the above course
+and participate in the training activities organized
+by the institution.
+
 </p>
 
-<p style="text-align:justify; line-height:1.4;">
-  During your period of study, you are expected to
-  demonstrate commitment, discipline, professionalism,
-  and respect for institutional regulations. We look forward to supporting your
-  educational journey and helping you achieve your
-  academic and career goals. Kindly keep this admission
-  letter for future reference during your studies.
+
+<p>
+
+During your period of study, you are expected to
+demonstrate commitment, discipline, professionalism
+and respect for institutional regulations. We look
+forward to supporting your educational journey and
+helping you develop practical digital and
+entrepreneurial skills that can contribute to your
+personal and professional growth.
+
 </p>
+
+
+<p>
+
+Kindly keep this admission letter for future reference
+during your period of study.
+
+</p>
+
+
 </div>
 
-<div style="text-align:left;">
 
-  <p>
-   <strong> Yours Faithfully,</strong>
-  </p>
+<div class="signature">
 
-  <img
+
+<p>
+<strong>
+Yours Faithfully,
+</strong>
+</p>
+
+
+<img
     src="/signature.jpg"
-    width="100"
-  >
+    alt="Signature"
+>
 
-  <p>
-    <strong>Abdullahi Sheikh Aden</strong>
-  </p>
 
-  <p>
-    Programme Coordinator
-  </p>
+<p>
 
-  <p>
-    Garissa Digital Empowerment Hub CBO
-  </p>
+<strong>
+Abdullahi Sheikh Aden
+</strong>
+
+</p>
+
+
+<p>
+Programme Coordinator
+</p>
+
+
+<p>
+Garissa Digital Empowerment Hub CBO
+</p>
+
 
 </div>
 
-<br>
 
-<hr>
+<div class="footer">
 
-<p style="text-align:center;">
-  © GDEH CBO All Rights Reserved
-</p>
+© 2026 Garissa Digital Empowerment Hub CBO.
+All Rights Reserved.
+
+</div>
+
+
 </body>
+
 </html>
-      `);
 
-      letter.document.close();
+            `);
 
-      setTimeout(() => {
 
-        letter.print();
+            letter.document.close();
 
-      }, 1000);
 
-      document
-      .getElementById(
-        "applicationForm"
-      )
-      .reset();
+            /* =========================================
+               AUTOMATIC PDF PRINT
+            ========================================= */
 
-      loadCounties();
+            setTimeout(
 
-    } catch (error) {
+                function(){
 
-      console.error(error);
+                    letter.focus();
 
-      alert(
-        "Failed to submit application"
-      );
+                    letter.print();
+
+                },
+
+                900
+
+            );
+
+
+            /* =========================================
+               RESET FORM
+            ========================================= */
+
+            this.reset();
+
+            document.getElementById(
+                "subCounty"
+            ).innerHTML =
+                '<option value="">Select Sub County</option>';
+
+            document.getElementById(
+                "ward"
+            ).innerHTML =
+                '<option value="">Select Ward</option>';
+
+
+            submitBtn.disabled =
+                false;
+
+            submitBtn.textContent =
+                "Submit Trainee Registration";
+
+
+        }catch(error){
+
+            console.error(
+                "Application error:",
+                error
+            );
+
+
+            alert(
+                error.message ||
+                "Failed to submit application."
+            );
+
+
+            submitBtn.disabled =
+                false;
+
+            submitBtn.textContent =
+                "Submit Trainee Registration";
+
+        }
 
     }
-
-  }
 );
 
-/*
-------------------------------------------------
-Initialize
-------------------------------------------------
-*/
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
 loadCounties();
 
 </script>
 
+
 </body>
+
 </html>
