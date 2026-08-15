@@ -1,145 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>GDEH Verification Portal</title>
 
-<style> 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --corporate-red:#C00000;
+    --dark:#222;
+    --muted:#666;
+    --border:#ddd;
+}
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
 }
 
 body{
-    background:#ffffff;
     min-height:100vh;
+    background:#fff;
+    color:var(--dark);
+    font-family:"Poppins","Segoe UI",Arial,sans-serif;
+    font-size:11px;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
+
+    padding:18px;
 }
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
     width:100%;
-    max-width:500px;
+    max-width:430px;
+
     background:#fff;
-    border-radius:12px;
-    padding:30px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.1);
-    border-top:5px solid #ff8c00;
+
+    border:1px solid #e3e3e3;
+    border-top:4px solid var(--corporate-red);
+
+    border-radius:8px;
+
+    padding:25px 24px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
 }
-.logo-img{
-    width:100px;
-    height:auto;
-    margin-bottom:12px;
-    }
+
+
+/* =========================
+   LOGO
+========================= */
+
 .logo{
     text-align:center;
-    margin-bottom:20px;
+    margin-bottom:22px;
+}
+
+.logo-img{
+    width:72px;
+    height:auto;
+    display:block;
+    margin:0 auto 8px;
 }
 
 .logo h1{
-    color:#0b1f3a;
-    font-size:18px;
+    color:var(--corporate-red);
+
+    font-family:"Poppins",sans-serif;
+    font-size:15px;
     font-weight:700;
-    margin-bottom:4px;
+
+    line-height:1.4;
 }
 
 .portal-title{
-    color:#0b1f3a;
-    font-size:14px;
+    color:#222;
+
+    font-family:"Allura",cursive;
+
+    font-size:17px;
     font-weight:700;
-    margin-bottom:0;
+
+    line-height:1.2;
+
+    margin-top:3px;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider{
+    width:45px;
+    height:2px;
+
+    background:var(--corporate-red);
+
+    margin:12px auto 20px;
+
+    border-radius:10px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group{
+    margin-top:5px;
 }
 
 label{
     display:block;
-    color:#ff8c00;
-    font-weight:bold;
-    margin-bottom:8px;
+
+    color:#222;
+
+    font-size:10.5px;
+    font-weight:600;
+
+    margin-bottom:6px;
 }
 
 input{
     width:100%;
-    padding:14px;
+
+    padding:10px 11px;
+
+    background:#fff;
+
     border:1px solid #ccc;
-    border-radius:8px;
-    margin-bottom:20px;
-    font-size:15px;
+    border-radius:5px;
+
+    color:#222;
+
+    font-family:"Poppins",sans-serif;
+    font-size:11px;
+
+    transition:.25s;
+}
+
+input::placeholder{
+    color:#999;
 }
 
 input:focus{
     outline:none;
-    border-color:#0b1f3a;
+
+    border-color:var(--corporate-red);
+
+    box-shadow:0 0 0 3px rgba(192,0,0,.07);
 }
+
+
+/* =========================
+   VERIFY BUTTON
+========================= */
 
 button{
     width:100%;
-    background:#0b1f3a;
+
+    margin-top:16px;
+
+    padding:10px 15px;
+
+    border:0;
+    border-radius:5px;
+
+    background:var(--corporate-red);
     color:#fff;
-    border:none;
-    padding:14px;
-    border-radius:8px;
+
+    font-family:"Poppins",sans-serif;
+    font-size:11px;
+    font-weight:600;
+
     cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
+
+    transition:.25s;
 }
 
 button:hover{
-    background:#ff8c00;
+    background:#a80000;
+    transform:translateY(-1px);
+
+    box-shadow:0 5px 12px rgba(192,0,0,.15);
 }
+
+
+/* =========================
+   HOME LINK
+========================= */
 
 .home-link{
     text-align:center;
-    margin-top:20px;
+
+    margin-top:18px;
 }
 
 .home-link a{
+    color:#222;
+
     text-decoration:none;
-    color:#0b1f3a;
-    font-weight:bold;
+
+    font-size:10.5px;
+    font-weight:600;
+
+    transition:.25s;
 }
 
-.footer{
-    text-align:center;
-    margin-top:25px;
-    color:#777;
-    font-size:13px;
+.home-link a:hover{
+    color:var(--corporate-red);
 }
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    margin-top:18px;
+    padding-top:14px;
+
+    border-top:1px solid #eee;
+
+    text-align:center;
+
+    color:#777;
+
+    font-size:9.5px;
+    line-height:1.6;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:480px){
+
+    body{
+        padding:12px;
+    }
+
+    .container{
+        padding:22px 18px;
+    }
+
+    .logo-img{
+        width:65px;
+    }
+
+    .logo h1{
+        font-size:14px;
+    }
+
+    .portal-title{
+        font-size:16px;
+    }
+
+    input{
+        padding:9px 10px;
+        font-size:10.5px;
+    }
+
+    button{
+        padding:9px;
+        font-size:10.5px;
+    }
+
+}
+
 </style>
 
 </head>
+
 <body>
-    
 
 <div class="container">
 
+    <!-- =========================
+         HEADER
+    ========================= -->
+
     <div class="logo">
-    <img src="/gdeh_logo.png" alt="GDEH Logo" class="logo-img">
 
-    <h1>Garissa Digital Empowerment Hub</h1>
+        <img
+            src="/gdeh_logo.png"
+            alt="GDEH Logo"
+            class="logo-img"
+        >
 
-    <h2 class="portal-title">
-        Document Verification Portal
-    </h2>
-</div>
+        <h1>
+            GARISSA DIGITAL EMPOWERMENT HUB CBO
+        </h1>
+
+        <h2 class="portal-title">
+            Document Verification Portal
+        </h2>
+
+        <div class="divider"></div>
+
+    </div>
+
+
+    <!-- =========================
+         VERIFICATION FORM
+    ========================= -->
 
     <form id="verifyForm">
 
-        <label for="reg">
-            Registration Number
-        </label>
+        <div class="form-group">
 
-        <input
-            type="text"
-            id="reg"
-            name="reg"
-            placeholder="Enter Registration Number"
-            required
-        >
+            <label for="reg">
+                Registration Number
+            </label>
+
+            <input
+                type="text"
+                id="reg"
+                name="reg"
+                placeholder="Enter registration number"
+                autocomplete="off"
+                required
+            >
+
+        </div>
+
 
         <button type="submit">
             Verify Document
@@ -147,31 +348,58 @@ button:hover{
 
     </form>
 
+
+    <!-- =========================
+         HOME
+    ========================= -->
+
     <div class="home-link">
+
         <a href="https://garissadigitaltraining.onrender.com">
             ← Back to Home
         </a>
+
     </div>
 
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
     <div class="footer">
-        Verify Certificates, Result Slips and Exam Cards
+
+        Verify Certificates, Result Slips and Examination Cards
+
     </div>
 
 </div>
+
+
 <script>
-document.getElementById("verifyForm")
-.addEventListener("submit", function(e) {
+
+document
+.getElementById("verifyForm")
+.addEventListener("submit", function(e){
+
     e.preventDefault();
 
     const reg =
-      document.getElementById("reg")
-      .value
-      .trim();
+        document
+        .getElementById("reg")
+        .value
+        .trim();
+
+    if(!reg){
+        return;
+    }
 
     window.location.href =
-      "/verify/" + encodeURIComponent(reg);
+        "/verify/" +
+        encodeURIComponent(reg);
+
 });
+
 </script>
 
 </body>
-</html>
+    </html>
